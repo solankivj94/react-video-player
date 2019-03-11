@@ -3,7 +3,8 @@ import './style.css';
 
 export default class Player extends Component {
 	state = {
-		playing: false
+		playing: false,
+		progress: 0
 	};
 
 	videoRef = React.createRef();
@@ -26,6 +27,13 @@ export default class Player extends Component {
 		this.videoRef.current[e.target.name] = e.target.value;
 	};
 
+	handleProgress = () => {
+		const percent = this.videoRef.current.currentTime / this.videoRef.current.duration * 100;
+		this.setState({
+			progress: percent
+		});
+	};
+
 	render() {
 		return (
 			<div className="player">
@@ -35,11 +43,12 @@ export default class Player extends Component {
 					src="https://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
 					onClick={this.playPauseVideo}
 					type="video/mp4"
+					onTimeUpdate={this.handleProgress}
 				/>
 
 				<div className="player__controls">
 					<div className="progress">
-						<div className="progress__filled" />
+						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
 					</div>
 					<button onClick={this.playPauseVideo} className="player__button toggle" title="Toggle Play">
 						{!this.state.playing ? '►' : '❚ ❚'}
