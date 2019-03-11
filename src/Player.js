@@ -7,6 +7,8 @@ export default class Player extends Component {
 		progress: 0
 	};
 
+	progressWidth = React.createRef();
+
 	videoRef = React.createRef();
 
 	playPauseVideo = () => {
@@ -34,6 +36,15 @@ export default class Player extends Component {
 		});
 	};
 
+	handleSrub = (e) => {
+		e.persist();
+
+		const scrubTime =
+			e.nativeEvent.offsetX / this.progressWidth.current.offsetWidth * this.videoRef.current.duration;
+
+		this.videoRef.current.currentTime = scrubTime;
+	};
+
 	render() {
 		return (
 			<div className="player">
@@ -47,7 +58,7 @@ export default class Player extends Component {
 				/>
 
 				<div className="player__controls">
-					<div className="progress">
+					<div className="progress" onClick={this.handleSrub} ref={this.progressWidth}>
 						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
 					</div>
 					<button onClick={this.playPauseVideo} className="player__button toggle" title="Toggle Play">
