@@ -19,8 +19,11 @@ export default class Player extends Component {
 	};
 
 	skip = (e) => {
-		console.log(e.target.dataset.skip);
 		this.videoRef.current.currentTime += parseFloat(e.target.dataset.skip);
+	};
+
+	handleRangeUpdate = (e) => {
+		this.videoRef.current[e.target.name] = e.target.value;
 	};
 
 	render() {
@@ -57,6 +60,7 @@ export default class Player extends Component {
 						min="0.5"
 						max="2"
 						step="0.1"
+						onChange={this.handleRangeUpdate}
 						// value="1"
 					/>
 					<button data-skip="-10" className="player__button" onClick={this.skip}>
