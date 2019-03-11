@@ -2,17 +2,41 @@ import React, { Component } from 'react';
 import './style.css';
 
 export default class Player extends Component {
+	state = {
+		playing: false
+	};
+
+	videoRef = React.createRef();
+
+	playVideo = () => {
+		if (!this.state.playing) {
+			this.setState({ playing: true });
+			this.videoRef.current.play();
+		} else {
+			this.setState({ playing: false });
+			this.videoRef.current.pause();
+		}
+	};
+
+	pauseVideo = () => {
+		// You can use the play method as normal on your video ref
+	};
 	render() {
 		return (
 			<div className="player">
-				<video className="player__video viewer" src="" />
+				<video
+					ref={this.videoRef}
+					className="player__video viewer"
+					src="https://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+					type="video/mp4"
+				/>
 
 				<div className="player__controls">
 					<div className="progress">
 						<div className="progress__filled" />
 					</div>
-					<button className="player__button toggle" title="Toggle Play">
-						►
+					<button onClick={this.playVideo} className="player__button toggle" title="Toggle Play">
+						{!this.state.playing ? '►' : '❚ ❚'}
 					</button>
 					<input
 						type="range"
