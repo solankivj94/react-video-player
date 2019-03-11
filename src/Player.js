@@ -83,6 +83,16 @@ export default class Player extends Component {
 		this.videoRef.current.currentTime = scrubTime;
 	};
 
+	fullScreenButton = () => {
+		if (this.videoRef.current.requestFullscreen) {
+			this.videoRef.current.requestFullscreen();
+		} else if (this.videoRef.current.mozRequestFullScreen) {
+			this.videoRef.current.mozRequestFullScreen(); // Firefox
+		} else if (this.videoRef.current.webkitRequestFullscreen) {
+			this.videoRef.current.webkitRequestFullscreen(); // Chrome and Safari
+		}
+	};
+
 	render() {
 		return (
 			<div className="player">
@@ -141,6 +151,7 @@ export default class Player extends Component {
 					</button>
 					<button>{this.state.currentTime}</button>
 					<button>{this.state.durationTime}</button>
+					<button onClick={this.fullScreenButton}>FullScrren</button>
 				</div>
 			</div>
 		);
