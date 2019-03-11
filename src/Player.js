@@ -1,4 +1,13 @@
 import React, { Component } from 'react';
+import {
+	MdFullscreen,
+	MdFastRewind,
+	MdFastForward,
+	MdVolumeUp,
+	MdVolumeOff,
+	MdPlayCircleOutline,
+	MdPauseCircleOutline
+} from 'react-icons/md';
 import './style.css';
 import myVideo from './custom/652333414.mp4';
 
@@ -120,20 +129,8 @@ export default class Player extends Component {
 					>
 						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
 					</div>
-					<button onClick={this.playPauseVideo} className="player__button toggle" title="Toggle Play">
-						{!this.state.playing ? '►' : '❚ ❚'}
-					</button>
-					<input
-						type="range"
-						name="volume"
-						className="player__slider"
-						min="0"
-						max="1"
-						step="0.05"
-						onChange={this.handleRangeUpdate}
-						value={this.state.defaultVol}
-					/>
-					<input
+
+					{/* <input
 						type="range"
 						name="playbackRate"
 						className="player__slider"
@@ -142,16 +139,47 @@ export default class Player extends Component {
 						step="0.1"
 						onChange={this.handleRangeUpdate}
 						value={this.state.defaultBack}
-					/>
-					<button data-skip="-10" className="player__button" onClick={this.skip}>
-						« 10s
-					</button>
-					<button data-skip="25" className="player__button" onClick={this.skip}>
-						25s »
-					</button>
-					<button>{this.state.currentTime}</button>
-					<button>{this.state.durationTime}</button>
-					<button onClick={this.fullScreenButton}>FullScrren</button>
+					/> */}
+
+					<div className="main-nav">
+						<div className="volume">
+							<MdVolumeUp />
+							<input
+								type="range"
+								name="volume"
+								className="player__slider"
+								min="0"
+								max="1"
+								step="0.05"
+								onChange={this.handleRangeUpdate}
+								value={this.state.defaultVol}
+							/>
+						</div>
+						<div className="center-button">
+							<p className="time">{this.state.currentTime}</p>
+							<button data-skip="-10" className="player__button rewind-btn" onClick={this.skip}>
+								<MdFastRewind />
+							</button>
+
+							<button
+								onClick={this.playPauseVideo}
+								className="player__button toggle playpausebutton"
+								title="Toggle Play"
+							>
+								{!this.state.playing ? <MdPlayCircleOutline /> : <MdPauseCircleOutline />}
+							</button>
+							<button data-skip="25" className="player__button rewind-btn" onClick={this.skip}>
+								<MdFastForward />
+							</button>
+
+							<p className="time">{this.state.durationTime}</p>
+						</div>
+						<div className="fullscreen">
+							<button onClick={this.fullScreenButton}>
+								<MdFullscreen />
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		);
