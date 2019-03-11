@@ -80,7 +80,7 @@ body {
 }
 
 .player:hover .progress {
-	height: 15px;
+	height: 7px;
 }
 
 /* .player__controls > * {
@@ -89,14 +89,14 @@ body {
 
 .progress {
 	display: flex;
-	flex: 10;
 	position: relative;
-	display: flex;
-	flex-basis: 100%;
 	height: 5px;
+	width: 98%;
 	transition: height 0.3s;
 	background: rgba(0, 0, 0, 0.5);
 	cursor: pointer;
+	border-radius: 10px;
+	margin-left: 8px;
 }
 
 .progress__filled {
@@ -104,6 +104,7 @@ body {
 	background: #ffc600;
 	flex: 0;
 	flex-basis: 50%;
+	border-radius: 10px;
 }
 
 /* unholy css to style input type="range" */
@@ -182,6 +183,7 @@ input[type=range]::-moz-range-thumb {
 .main-nav .volume svg {
 	width: 20px;
 	height: 20px;
+	fill: #fff;
 }
 
 .main-nav .volume input {
@@ -195,7 +197,7 @@ input[type=range]::-moz-range-thumb {
 .main-nav .center-button .time {
 	font-size: 1.3rem;
 	font-weight: 600;
-	color: #000;
+	color: #fff;
 	padding: 0 20px;
 }
 
@@ -221,5 +223,5 @@ input[type=range]::-moz-range-thumb {
 .fullscreen button svg {
 	width: 20px;
 	height: 20px;
-	fill: #000;
+	fill: #fff;
 }
