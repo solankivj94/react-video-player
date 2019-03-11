@@ -4,7 +4,10 @@ import './style.css';
 export default class Player extends Component {
 	state = {
 		playing: false,
-		progress: 0
+		progress: 0,
+		mouseDown: false,
+		defaultVol: 0.5,
+		defaultBack: 0.5
 	};
 
 	progressWidth = React.createRef();
@@ -27,6 +30,15 @@ export default class Player extends Component {
 
 	handleRangeUpdate = (e) => {
 		this.videoRef.current[e.target.name] = e.target.value;
+		if (e.target.name === 'volume') {
+			this.setState({
+				defaultVol: e.target.value
+			});
+		} else {
+			this.setState({
+				defaultBack: e.target.value
+			});
+		}
 	};
 
 	handleProgress = () => {
@@ -58,7 +70,18 @@ export default class Player extends Component {
 				/>
 
 				<div className="player__controls">
-					<div className="progress" onClick={this.handleSrub} ref={this.progressWidth}>
+					<div
+						className="progress"
+						onClick={this.handleSrub}
+						onMouseMove={(e) => this.state.mouseDown && this.handleSrub(e)}
+						onMouseDown={() => {
+							this.setState({ mouseDown: true });
+						}}
+						onMouseUp={() => {
+							this.setState({ mouseDown: false });
+						}}
+						ref={this.progressWidth}
+					>
 						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
 					</div>
 					<button onClick={this.playPauseVideo} className="player__button toggle" title="Toggle Play">
@@ -71,17 +94,18 @@ export default class Player extends Component {
 						min="0"
 						max="1"
 						step="0.05"
-						// value="1"
+						onChange={this.handleRangeUpdate}
+						value={this.state.defaultVol}
 					/>
 					<input
 						type="range"
 						name="playbackRate"
 						className="player__slider"
 						min="0.5"
-						max="2"
+						max="6"
 						step="0.1"
 						onChange={this.handleRangeUpdate}
-						// value="1"
+						value={this.state.defaultBack}
 					/>
 					<button data-skip="-10" className="player__button" onClick={this.skip}>
 						« 10s
