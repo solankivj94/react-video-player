@@ -9,7 +9,7 @@ export default class Player extends Component {
 		mouseDown: false,
 		defaultVol: 0.5,
 		defaultBack: 0.5,
-		duration: 0,
+		durationTime: 0,
 		currentTime: 0
 	};
 
@@ -23,8 +23,6 @@ export default class Player extends Component {
 				playing: true
 			});
 			this.videoRef.current.play();
-			// console.log('duration', this.videoRef.current.duration);
-			// console.log('duration', this.videoRef.current.currentTime);
 		} else {
 			this.setState({ playing: false });
 			this.videoRef.current.pause();
@@ -50,10 +48,29 @@ export default class Player extends Component {
 
 	handleProgress = () => {
 		const percent = this.videoRef.current.currentTime / this.videoRef.current.duration * 100;
+
+		let durMin = Math.floor(this.videoRef.current.duration / 60);
+		let durSec = Math.floor(this.videoRef.current.duration - durMin * 60);
+		let currentMin = Math.floor(this.videoRef.current.currentTime / 60);
+		let currentSec = Math.floor(this.videoRef.current.currentTime - currentMin * 60);
+
+		if (currentSec < 10) {
+			currentSec = '0' + currentSec;
+		}
+		if (durSec < 10) {
+			durSec = '0' + durSec;
+		}
+		if (currentMin < 10) {
+			currentMin = '0' + currentMin;
+		}
+		if (durMin < 10) {
+			durMin = '0' + durMin;
+		}
+
 		this.setState({
 			progress: percent,
-			duration: this.videoRef.current.duration,
-			currentTime: this.videoRef.current.currentTime
+			durationTime: `${durMin}:${durSec}`,
+			currentTime: `${currentMin}:${currentSec}`
 		});
 	};
 
@@ -122,8 +139,8 @@ export default class Player extends Component {
 					<button data-skip="25" className="player__button" onClick={this.skip}>
 						25s »
 					</button>
-					<button>{this.state.currentTime % 60}</button>
-					<button>{`${parseFloat(this.state.duration / 60, 10).toFixed(2)} Min`}</button>
+					<button>{this.state.currentTime}</button>
+					<button>{this.state.durationTime}</button>
 				</div>
 			</div>
 		);
