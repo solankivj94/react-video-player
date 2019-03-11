@@ -8,7 +8,7 @@ export default class Player extends Component {
 
 	videoRef = React.createRef();
 
-	playVideo = () => {
+	playPauseVideo = () => {
 		if (!this.state.playing) {
 			this.setState({ playing: true });
 			this.videoRef.current.play();
@@ -18,9 +18,11 @@ export default class Player extends Component {
 		}
 	};
 
-	pauseVideo = () => {
-		// You can use the play method as normal on your video ref
+	skip = (e) => {
+		console.log(e.target.dataset.skip);
+		this.videoRef.current.currentTime += parseFloat(e.target.dataset.skip);
 	};
+
 	render() {
 		return (
 			<div className="player">
@@ -28,6 +30,7 @@ export default class Player extends Component {
 					ref={this.videoRef}
 					className="player__video viewer"
 					src="https://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+					onClick={this.playPauseVideo}
 					type="video/mp4"
 				/>
 
@@ -35,7 +38,7 @@ export default class Player extends Component {
 					<div className="progress">
 						<div className="progress__filled" />
 					</div>
-					<button onClick={this.playVideo} className="player__button toggle" title="Toggle Play">
+					<button onClick={this.playPauseVideo} className="player__button toggle" title="Toggle Play">
 						{!this.state.playing ? '►' : '❚ ❚'}
 					</button>
 					<input
@@ -56,10 +59,10 @@ export default class Player extends Component {
 						step="0.1"
 						// value="1"
 					/>
-					<button data-skip="-10" className="player__button">
+					<button data-skip="-10" className="player__button" onClick={this.skip}>
 						« 10s
 					</button>
-					<button data-skip="25" className="player__button">
+					<button data-skip="25" className="player__button" onClick={this.skip}>
 						25s »
 					</button>
 				</div>
