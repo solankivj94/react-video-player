@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './style.css';
+import myVideo from './custom/652333414.mp4';
 
 export default class Player extends Component {
 	state = {
@@ -7,7 +8,9 @@ export default class Player extends Component {
 		progress: 0,
 		mouseDown: false,
 		defaultVol: 0.5,
-		defaultBack: 0.5
+		defaultBack: 0.5,
+		duration: 0,
+		currentTime: 0
 	};
 
 	progressWidth = React.createRef();
@@ -16,8 +19,12 @@ export default class Player extends Component {
 
 	playPauseVideo = () => {
 		if (!this.state.playing) {
-			this.setState({ playing: true });
+			this.setState({
+				playing: true
+			});
 			this.videoRef.current.play();
+			// console.log('duration', this.videoRef.current.duration);
+			// console.log('duration', this.videoRef.current.currentTime);
 		} else {
 			this.setState({ playing: false });
 			this.videoRef.current.pause();
@@ -44,7 +51,9 @@ export default class Player extends Component {
 	handleProgress = () => {
 		const percent = this.videoRef.current.currentTime / this.videoRef.current.duration * 100;
 		this.setState({
-			progress: percent
+			progress: percent,
+			duration: this.videoRef.current.duration,
+			currentTime: this.videoRef.current.currentTime
 		});
 	};
 
@@ -63,7 +72,7 @@ export default class Player extends Component {
 				<video
 					ref={this.videoRef}
 					className="player__video viewer"
-					src="https://clips.vorwaerts-gmbh.de/VfE_html5.mp4"
+					src={myVideo}
 					onClick={this.playPauseVideo}
 					type="video/mp4"
 					onTimeUpdate={this.handleProgress}
@@ -113,6 +122,8 @@ export default class Player extends Component {
 					<button data-skip="25" className="player__button" onClick={this.skip}>
 						25s »
 					</button>
+					<button>{this.state.currentTime % 60}</button>
+					<button>{`${parseFloat(this.state.duration / 60, 10).toFixed(2)} Min`}</button>
 				</div>
 			</div>
 		);
