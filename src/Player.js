@@ -39,7 +39,9 @@ export default class Player extends Component {
 	};
 
 	skip = (e) => {
-		this.videoRef.current.currentTime += parseFloat(e.target.dataset.skip);
+		this.videoRef.current.currentTime += parseFloat(e.currentTarget.dataset.skip);
+		// console.log(this.videoRef.current.currentTime);
+		// console.log(parseFloat(e.currentTarget.dataset.skip));
 	};
 
 	handleRangeUpdate = (e) => {
