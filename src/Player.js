@@ -58,9 +58,9 @@ export default class Player extends Component {
 		var loadEndPercentage = bf.end(range) / this.videoRef.current.duration;
 		var loadPercentage = loadEndPercentage - loadStartPercentage;
 
-		console.log(loadPercentage);
+		console.log(loadPercentage * 100);
 		this.setState({
-			bufferLoad: loadPercentage
+			bufferLoad: loadPercentage * 100
 		});
 	};
 
@@ -151,7 +151,7 @@ export default class Player extends Component {
 						ref={this.progressWidth}
 					>
 						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
-						<div className="progress__buffered" style={{ flexBasis: `${this.state.bufferLoad}%` }} />
+						<div className="progress__buffered" style={{ width: `${this.state.bufferLoad}%` }} />
 					</div>
 
 					{/* <input
