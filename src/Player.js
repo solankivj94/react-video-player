@@ -19,7 +19,8 @@ export default class Player extends Component {
 		defaultVol: 0.5,
 		defaultBack: 0.5,
 		durationTime: 0,
-		currentTime: 0
+		currentTime: 0,
+		bufferLoad: 0
 	};
 
 	progressWidth = React.createRef();
@@ -42,6 +43,25 @@ export default class Player extends Component {
 		this.videoRef.current.currentTime += parseFloat(e.currentTarget.dataset.skip);
 		// console.log(this.videoRef.current.currentTime);
 		// console.log(parseFloat(e.currentTarget.dataset.skip));
+	};
+
+	buffering = (e) => {
+		e.persist();
+		var range = 0;
+		var bf = this.videoRef.current.buffered;
+		var time = this.videoRef.current.currentTime;
+
+		while (!(bf.start(range) <= time && time <= bf.end(range))) {
+			range += 1;
+		}
+		var loadStartPercentage = bf.start(range) / this.videoRef.current.duration;
+		var loadEndPercentage = bf.end(range) / this.videoRef.current.duration;
+		var loadPercentage = loadEndPercentage - loadStartPercentage;
+
+		console.log(loadPercentage);
+		this.setState({
+			bufferLoad: loadPercentage
+		});
 	};
 
 	handleRangeUpdate = (e) => {
@@ -114,6 +134,7 @@ export default class Player extends Component {
 					onClick={this.playPauseVideo}
 					type="video/mp4"
 					onTimeUpdate={this.handleProgress}
+					onProgress={this.buffering}
 				/>
 
 				<div className="player__controls">
@@ -130,6 +151,7 @@ export default class Player extends Component {
 						ref={this.progressWidth}
 					>
 						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
+						<div className="progress__buffered" style={{ flexBasis: `${this.state.bufferLoad}%` }} />
 					</div>
 
 					{/* <input
