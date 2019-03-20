@@ -50,7 +50,10 @@ export default class Player extends Component {
 		var range = 0;
 		var bf = this.videoRef.current.buffered;
 		var time = this.videoRef.current.currentTime;
-
+		// console.log('start', bf.start(range));
+		// console.log('end', bf.end(range));
+		// console.log('time', time);
+		// console.log('ready', this.videoRef.current.readyState);
 		while (!(bf.start(range) <= time && time <= bf.end(range))) {
 			range += 1;
 		}
@@ -58,7 +61,6 @@ export default class Player extends Component {
 		var loadEndPercentage = bf.end(range) / this.videoRef.current.duration;
 		var loadPercentage = loadEndPercentage - loadStartPercentage;
 
-		console.log(loadPercentage * 100);
 		this.setState({
 			bufferLoad: loadPercentage * 100
 		});
@@ -112,6 +114,11 @@ export default class Player extends Component {
 			e.nativeEvent.offsetX / this.progressWidth.current.offsetWidth * this.videoRef.current.duration;
 
 		this.videoRef.current.currentTime = scrubTime;
+		console.log('scrub', scrubTime / this.videoRef.current.duration * 100);
+
+		// this.setState({
+		// 	bufferLoad: scrubTime / this.videoRef.current.duration * 100
+		// });
 	};
 
 	fullScreenButton = () => {

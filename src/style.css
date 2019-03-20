@@ -101,18 +101,18 @@ body {
 
 .progress__filled {
 	width: 50%;
-	background: #ffc600;
+	background: #fff;
 	flex: 0;
 	flex-basis: 50%;
 	border-radius: 10px;
+	z-index: 22;
 }
 
 .progress__buffered {
 	position: absolute;
-	background: #999;
+	background: #6d7e98;
 	border-radius: 10px;
-	height: 5px;
-	z-index: 22;
+	height: 7px;
 }
 
 /* unholy css to style input type="range" */
