@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { IoMdPlay, IoMdPause, IoMdSkipBackward, IoMdSkipForward, IoMdQrScanner, IoMdVolumeHigh } from 'react-icons/io';
 
 import './style.css';
-import myVideo from './custom/652333414.mp4';
 
 export default class Player extends Component {
 	state = {
@@ -131,11 +130,11 @@ export default class Player extends Component {
 				<video
 					ref={this.videoRef}
 					className="player__video viewer"
-					src={myVideo}
+					src={this.props.videoSrc}
 					onClick={this.playPauseVideo}
 					type="video/mp4"
 					onTimeUpdate={this.handleProgress}
-					onProgress={this.buffering}
+					// onProgress={this.buffering}
 				/>
 
 				<div className="player__controls">
@@ -152,7 +151,7 @@ export default class Player extends Component {
 						ref={this.progressWidth}
 					>
 						<div className="progress__filled" style={{ flexBasis: `${this.state.progress}%` }} />
-						<div className="progress__buffered" style={{ width: `${this.state.bufferLoad}%` }} />
+						{/* <div className="progress__buffered" style={{ width: `${this.state.bufferLoad}%` }} /> */}
 					</div>
 
 					{/* <input
