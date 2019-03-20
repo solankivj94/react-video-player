@@ -13,9 +13,10 @@ body {
 	padding: 0;
 	display: flex;
 	font-family: 'Lato', sans-serif;
-	background: #7a419b;
 	min-height: 100vh;
-	background: linear-gradient(135deg, #7c1599 0%, #921099 48%, #7e4ae8 100%);
+	background: #4776e6; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #4776e6, #8e54e9); /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #4776e6, #8e54e9);
 	background-size: cover;
 	align-items: center;
 	justify-content: center;
@@ -170,6 +171,14 @@ input[type=range]::-moz-range-thumb {
 	border-radius: 50px;
 	background: #ffc600;
 	cursor: pointer;
+}
+
+.main-heading {
+	font-weight: 400;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 2rem;
+	color: #fff;
 }
 
 .main-nav {

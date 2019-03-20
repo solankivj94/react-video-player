@@ -6,6 +6,7 @@ class App extends Component {
 	render() {
 		return (
 			<React.Fragment>
+				<h1 className="main-heading">Custom React Video Player</h1>
 				<Player videoSrc={myVideo} />
 			</React.Fragment>
 		);
