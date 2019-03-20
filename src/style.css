@@ -13,6 +13,7 @@ body {
 	padding: 0;
 	display: flex;
 	background: #7a419b;
+	font-family: 'Lato', sans-serif;
 	min-height: 100vh;
 	background: linear-gradient(135deg, #7c1599 0%, #921099 48%, #7e4ae8 100%);
 	background-size: cover;
@@ -22,8 +23,6 @@ body {
 
 .player {
 	width: 750px;
-	border: 5px solid rgba(0, 0, 0, 0.2);
-	box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 	position: relative;
 	font-size: 0;
 	overflow: hidden;
@@ -72,7 +71,6 @@ body {
 	transform: translateY(100%) translateY(-5px);
 	transition: all .3s;
 	flex-wrap: wrap;
-	background: rgba(0, 0, 0, 0.1);
 }
 
 .player:hover .player__controls {
@@ -80,7 +78,7 @@ body {
 }
 
 .player:hover .progress {
-	height: 7px;
+	height: 5px;
 }
 
 /* .player__controls > * {
@@ -97,6 +95,7 @@ body {
 	cursor: pointer;
 	border-radius: 10px;
 	margin-left: 8px;
+	margin-top: -11px;
 }
 
 .progress__filled {
@@ -104,6 +103,7 @@ body {
 	background: #fff;
 	flex: 0;
 	flex-basis: 50%;
+	height: 5px;
 	border-radius: 10px;
 	z-index: 22;
 }
@@ -112,7 +112,7 @@ body {
 	position: absolute;
 	background: #6d7e98;
 	border-radius: 10px;
-	height: 7px;
+	height: 5px;
 }
 
 /* unholy css to style input type="range" */
@@ -205,8 +205,8 @@ input[type=range]::-moz-range-thumb {
 }
 
 .main-nav .center-button .time {
-	font-size: 1.3rem;
-	font-weight: 600;
+	font-size: 1.1rem;
+	font-weight: 500;
 	color: #fff;
 	padding: 0 20px;
 }
@@ -216,13 +216,15 @@ input[type=range]::-moz-range-thumb {
 }
 
 .rewind-btn svg {
-	width: 20px;
-	height: 20px;
+	width: 15px;
+	height: 15px;
+	margin: 0 10px;
 }
 
 .playpausebutton svg {
-	width: 40px;
-	height: 40px;
+	width: 30px;
+	height: 30px;
+	margin: 0 10px;
 }
 
 .fullscreen button {
@@ -252,7 +254,7 @@ input[type=range]::-webkit-slider-runnable-track {
 	height: 2px;
 	cursor: pointer;
 	animate: 0.2s;
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
 	border-radius: 35px;
 }
 input[type=range]::-webkit-slider-thumb {
@@ -265,14 +267,14 @@ input[type=range]::-webkit-slider-thumb {
 	margin-top: -6px;
 }
 input[type=range]:focus::-webkit-slider-runnable-track {
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
 }
 input[type=range]::-moz-range-track {
 	width: 100%;
 	height: 2px;
 	cursor: pointer;
 	animate: 0.2s;
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
 	border-radius: 35px;
 }
 input[type=range]::-moz-range-thumb {
@@ -292,11 +294,11 @@ input[type=range]::-ms-track {
 	color: transparent;
 }
 input[type=range]::-ms-fill-lower {
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
 	border-radius: 70px;
 }
 input[type=range]::-ms-fill-upper {
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
 	border-radius: 70px;
 }
 input[type=range]::-ms-thumb {
@@ -308,8 +310,28 @@ input[type=range]::-ms-thumb {
 	cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
 }
 input[type=range]:focus::-ms-fill-upper {
-	background: rgba(0, 0, 0, 0.5);
+	background: #fff;
+}
+
+/* Volume Animation */
+
+.volume {
+	position: relative;
+}
+
+.volume-ani {
+}
+
+.player__slider {
+	position: absolute;
+	left: -200px;
+	transition: 1s;
+}
+
+.volume:hover .player__slider {
+	transition: 1s;
+	left: 30px;
 }

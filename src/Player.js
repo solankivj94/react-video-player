@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import {
-	MdFullscreen,
-	MdFastRewind,
-	MdFastForward,
-	MdVolumeUp,
-	MdVolumeOff,
-	MdPlayCircleOutline,
-	MdPauseCircleOutline
-} from 'react-icons/md';
+
+import { IoMdPlay, IoMdPause, IoMdSkipBackward, IoMdSkipForward, IoMdQrScanner, IoMdVolumeHigh } from 'react-icons/io';
+
 import './style.css';
 import myVideo from './custom/652333414.mp4';
 
@@ -174,7 +168,7 @@ export default class Player extends Component {
 
 					<div className="main-nav">
 						<div className="volume">
-							<MdVolumeUp />
+							<IoMdVolumeHigh className="volume-ani" />
 							<input
 								type="range"
 								name="volume"
@@ -189,7 +183,7 @@ export default class Player extends Component {
 						<div className="center-button">
 							<p className="time">{this.state.currentTime}</p>
 							<button data-skip="-10" className="player__button rewind-btn" onClick={this.skip}>
-								<MdFastRewind />
+								<IoMdSkipBackward />
 							</button>
 
 							<button
@@ -197,17 +191,17 @@ export default class Player extends Component {
 								className="player__button toggle playpausebutton"
 								title="Toggle Play"
 							>
-								{!this.state.playing ? <MdPlayCircleOutline /> : <MdPauseCircleOutline />}
+								{!this.state.playing ? <IoMdPlay /> : <IoMdPause />}
 							</button>
 							<button data-skip="25" className="player__button rewind-btn" onClick={this.skip}>
-								<MdFastForward />
+								<IoMdSkipForward />
 							</button>
 
 							<p className="time">{this.state.durationTime}</p>
 						</div>
 						<div className="fullscreen">
 							<button onClick={this.fullScreenButton}>
-								<MdFullscreen />
+								<IoMdQrScanner />
 							</button>
 						</div>
 					</div>
